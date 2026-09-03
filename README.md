@@ -1,19 +1,16 @@
 # PLA Reverse Finder
 
-포켓몬 레전드 아르세우스(Pokémon Legends: Arceus) 개체를 PKHeX로 편집할 때,
-**원하는 [조우 타입 / 종류 / IV / 성격 / 키·몸무게 / 샤이니]를 입력하면 그 개체를 만들어내는
-합법 Xoroshiro 세트(EC / PID / IVs / 특성 / 성별 / 키 / 몸무게 / seed)를 역산**해 주는
-GUI 도구입니다.
+포켓몬 레전즈 아르세우스에서 포획한 포켓몬을 PKHeX로 에딧할 때, 자연산의 경우 PID 유형이 'xoroshiro'로 되어 있다. 이 상태에서 에딧으로 성격이나 개체값을 변경하면 이 PID 유형이 'None'으로 바뀌어 버린다.
 
-> A GUI tool that reverse-searches a legal Xoroshiro RNG spread (EC / PID / IVs / ability /
-> gender / height / weight / seed) for Pokémon Legends: Arceus, given the traits you want.
-> Paste a result into PKHeX and it validates as a legal `Xoroshiro` PID spread.
+이 도구는 해당하는 포켓몬의 성격, 개체값, 성별, 특성, 이로치 여부를 입력하면 가능한 원본 시드, 그에 해당하는 암호화 상수(EC)와 PID 값을 역산하여 PKHeX 상에서 에딧한 포켓몬도 PID 유형이 xoroshiro로 나타나도록 하기 위해 만들어졌다. 추가로 TID와 SID를 넣으면 이로치 포켓몬이 만들어지는 시드도 계산할 수 있다.
+
+...라고 하지만, 이로치의 경우 시스템상 PID가 원본에서 변형되고, 이 변형된 PID에 대한 원본 시드를 추적하는 기능은 PKHeX 자체에 없기 때문에(즉 실제로 알맞은 원본 시드를 찾아 EC와 PID를 넣어도 PKHeX는 그걸 역산하지 않기 때문에), 이로치 포켓몬은 여전히 PID 유형이 xoroshiro로 나타난다. 결과로 나온 값 자체는 이로치 PID가 맞기 때문에 이로치로 표시는 정상적으로 된다. PID 유형이 None이라 찝찝해서 그렇지.
 
 ![screenshot](docs/screenshot.png) <!-- 스크린샷을 찍어 docs/ 에 넣으면 여기 표시됩니다 -->
 
 ## 특징
 
-- 조우 타입: **야생 오버월드 / 전설·정적 / 우두머리** (보장 31 IV 자동 설정)
+- 조우 타입: **야생 오버월드 / 전설·정적 / 우두머리** (전설 및 우두머리는 최소 3V 보정 자동 설정)
 - 종류 입력: **한국어·영어 모두** 지원 (예: `크레세리아`, `arceus`), 대소문자 무시
 - **성별 자동 판정**: PLA 등장 종의 성별 비율표 내장 → 결과를 암/수/무성으로 표시
 - **샤이니 + TID/SID(6자리/4자리)**: 게임 실제 규칙대로 PID를 확정해 합법 샤이니 생성
